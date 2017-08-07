@@ -1,6 +1,6 @@
 machine:
   environment:
-    JAVA_OPTS: "-Xmx512m -XX:MaxPermSize=1024m"
+    JAVA_OPTS: "-Xmx1536m -XX:MaxPermSize=1024m"
   timezone: Asia/Saigon
 dependencies:
   cache_directories:
