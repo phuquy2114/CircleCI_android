@@ -1,5 +1,6 @@
 machine:
   environment:
+  ANDROID_HOME: /usr/local/android-sdk-linux
     JAVA_OPTS: "-Xmx1536m -XX:MaxPermSize=2048m"
   timezone: Asia/Saigon
 dependencies:
@@ -16,7 +17,7 @@ dependencies:
     - $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "extras;android;m2repository" "extras;google;m2repository"
     - $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1"
     - $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.1"
-    - curl -fSL https://github.com/haya14busa/reviewdog/releases/download/$REVIEWDOG_VERSION/reviewdog_linux_amd64 -o reviewdog && chmod +x ./reviewdog
+
   cache_directories:
     # Android SDK
     - /usr/local/android-sdk-linux/tools
