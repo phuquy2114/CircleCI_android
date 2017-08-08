@@ -1,10 +1,34 @@
 machine:
   environment:
-    JAVA_OPTS: "-Xmx512m -XX:MaxPermSize=1024m"
+  ANDROID_HOME: /usr/local/android-sdk-linux
+    JAVA_OPTS: "-Xmx1536m -XX:MaxPermSize=2048m"
   timezone: Asia/Saigon
+
 dependencies:
   cache_directories:
     - ~/.android
+
+dependencies:
+  pre:
+    - git fetch origin # sometimes circleci fail to fetch branches correctly, so fetch them expressly
+    - echo y | android -s update sdk -u -a -t "tools" # update Android SDK that includes sdkmanager(1)
+    - mkdir -p $ANDROID_HOME/licenses
+
+  cache_directories:
+    # Android SDK
+    - /usr/local/android-sdk-linux/tools
+    - /usr/local/android-sdk-linux/platform-tools
+    - /usr/local/android-sdk-linux/build-tools
+    - /usr/local/android-sdk-linux/licenses
+    - /usr/local/android-sdk-linux/extras/google/m2repository
+
+    # Gradle caches
+    - /home/ubuntu/.gradle/caches/
+    - /home/ubuntu/.gradle/wrapper/
+  override:
+    - ./gradlew app:dependencies
+
+
 test:
   override:
     - scripts/saddler.sh
